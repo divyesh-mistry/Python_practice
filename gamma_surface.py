@@ -1,5 +1,5 @@
 # Compute generalized stacking fault energy using LAMMPS MS simulations.  new goal
-#Test
+#Test  dsss
 import numpy as np
 import subprocess as sp
 import matplotlib.pyplot as plt
