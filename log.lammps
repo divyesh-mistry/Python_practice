@@ -1,0 +1,105 @@
+LAMMPS (09 Jan 2020)
+units metal
+dimension 3
+boundary p p s
+
+atom_style atomic
+
+read_data deformed_crystal.lmp
+  orthogonal box = (0 0 0) to (5.14637 8.91377 75.6358)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  288 atoms
+  read_data CPU = 0.000780238 secs
+pair_style eam/fs
+pair_coeff * * Mendelev_Cu2_2012.eam.fs Cu
+neighbor 2.0 bin
+neigh_modify delay 10 check yes
+thermo 1
+thermo_style custom step pe
+# Allow relaxation along the z direction
+fix 1 all setforce 0 0 NULL
+variable totenergy equal "pe"
+#minimization algorithm conjugate gradient (CG) algorithm
+min_style cg
+minimize 1e-10 1e-10 1000 100000
+WARNING: Using 'neigh_modify every 1 delay 0 check yes' setting during minimization (src/min.cpp:178)
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 8
+  ghost atom cutoff = 8
+  binsize = 4, bins = 2 3 19
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 4.229 | 4.229 | 4.229 Mbytes
+Step PotEng 
+       0    -979.7906 
+       1   -979.87715 
+       2   -979.89067 
+       3   -979.89528 
+       4   -979.89701 
+       5   -979.89766 
+       6   -979.89809 
+       7    -979.8983 
+       8   -979.89844 
+       9   -979.89853 
+      10   -979.89858 
+      11   -979.89863 
+      12   -979.89866 
+      13   -979.89868 
+      14    -979.8987 
+      15    -979.8987 
+      16    -979.8987 
+      17   -979.89871 
+      18   -979.89874 
+      19   -979.89876 
+      20   -979.89877 
+      21   -979.89877 
+      22   -979.89877 
+      23   -979.89877 
+      24   -979.89877 
+      25   -979.89877 
+Loop time of 0.0434825 on 1 procs for 25 steps with 288 atoms
+
+99.6% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+        -979.790604741     -979.898770871     -979.898770942
+  Force two-norm initial, final = 1.17123 0.000682498
+  Force max component initial, final = 0.215911 8.73282e-05
+  Final line search alpha, max atom move = 1 8.73282e-05
+  Iterations, force evaluations = 25 49
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.042323   | 0.042323   | 0.042323   |   0.0 | 97.33
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.00065406 | 0.00065406 | 0.00065406 |   0.0 |  1.50
+Output  | 4.2229e-05 | 4.2229e-05 | 4.2229e-05 |   0.0 |  0.10
+Modify  | 5.2856e-05 | 5.2856e-05 | 5.2856e-05 |   0.0 |  0.12
+Other   |            | 0.0004102  |            |       |  0.94
+
+Nlocal:    288 ave 288 max 288 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    3084 ave 3084 max 3084 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    24360 ave 24360 max 24360 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 24360
+Ave neighs/atom = 84.5833
+Neighbor list builds = 0
+Dangerous builds = 0
+print "%% Total Energy (eV) = ${totenergy}"
+%% Total Energy (eV) = -979.898770942026
+print "Energy minimization completed!"
+Energy minimization completed!
+Total wall time: 0:00:00

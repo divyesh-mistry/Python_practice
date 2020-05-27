@@ -1,0 +1,21 @@
+units metal
+dimension 3
+boundary p p s
+
+atom_style atomic
+
+read_data deformed_crystal.lmp
+pair_style eam/fs
+pair_coeff * * Mendelev_Cu2_2012.eam.fs Cu
+neighbor 2.0 bin
+neigh_modify delay 10 check yes
+thermo 1
+thermo_style custom step pe
+# Allow relaxation along the z direction
+fix 1 all setforce 0 0 NULL 
+variable totenergy equal "pe"
+#minimization algorithm conjugate gradient (CG) algorithm
+min_style cg
+minimize 1e-10 1e-10 1000 100000
+print "%% Total Energy (eV) = ${totenergy}"
+print "Energy minimization completed!"
