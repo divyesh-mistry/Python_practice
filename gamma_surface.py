@@ -5,7 +5,7 @@ import subprocess as sp
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import axes3d
-# hi divyesh
+# hi divyesh you can do it
 lammps_exe = "lmp_daily"
 
 latconst_in  = "lat_const.in"
