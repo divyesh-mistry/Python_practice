@@ -1,4 +1,4 @@
-# Compute generalized stacking fault energy using LAMMPS MS simulations. 
+# Compute generalized stacking fault energy using LAMMPS MS simulations.  new goal
 #Test
 import numpy as np
 import subprocess as sp
