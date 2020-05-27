@@ -1,7 +1,7 @@
 units metal
 dimension 3
 boundary p p s
-hi 
+
 atom_style atomic
 
 read_data deformed_crystal.lmp
