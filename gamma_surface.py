@@ -44,7 +44,7 @@ def compute_lattice_constant(lat_const_ref,
 	
 	with open(lammps_out, "wb") as fout:
 		fout.write(lammps_out_str)
-	
+	#ds
 	lat_const = 0.0
 	
 	with open(lammps_out, "r") as fl:
